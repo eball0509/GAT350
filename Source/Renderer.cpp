@@ -1,30 +1,25 @@
-#include "iostream"
-#include <SDL.h>
-using namespace std;
+#include "Renderer.h"
 
-int main(int argc, char* argv[])
+
+void Renderer::Initialize()
 {
-    // initialize SDL
     if (SDL_Init(SDL_INIT_VIDEO) < 0)
     {
-        std::cerr << "Error initializing SDL: " << SDL_GetError() << std::endl;
-        return 1;
+        cerr << "Error initializing SDL: " << SDL_GetError() << std::endl;
     }
+}
 
-    // create window
-    // returns pointer to window if successful or nullptr if failed
+void Renderer::CreateWindow()
+{
     SDL_Window* window = SDL_CreateWindow("Game Engine",
         SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
         800, 600,
         SDL_WINDOW_SHOWN);
     if (window == nullptr)
     {
-        std::cerr << "Error creating SDL window: " << SDL_GetError() << std::endl;
+        cerr << "Error creating SDL window: " << SDL_GetError() << std::endl;
         SDL_Quit();
-        return 1;
     }
-
-    // create renderer
     SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, 0);
 
     while (true)
@@ -37,5 +32,4 @@ int main(int argc, char* argv[])
         SDL_RenderPresent(renderer);
     }
 
-    return 0;
 }
