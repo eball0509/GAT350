@@ -9,27 +9,29 @@ void Renderer::Initialize()
     }
 }
 
-void Renderer::CreateWindow()
+void Renderer::CreateWindow(string name, int width, int height)
 {
-    SDL_Window* window = SDL_CreateWindow("Game Engine",
+        m_window = SDL_CreateWindow("Game Engine",
         SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-        800, 600,
+        width, height,
         SDL_WINDOW_SHOWN);
-    if (window == nullptr)
+    if (m_window == nullptr)
     {
         cerr << "Error creating SDL window: " << SDL_GetError() << std::endl;
         SDL_Quit();
     }
-    SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, 0);
+    m_renderer = SDL_CreateRenderer(m_window, -1, 0);
 
-    while (true)
-    {
-        // clear screen
-        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
-        SDL_RenderClear(renderer);
+    
 
-        // show screen
-        SDL_RenderPresent(renderer);
-    }
+}
 
+void Renderer::CopyFrameBuffer(const Framebuffer framebuffer)
+{
+    SDL_RenderCopy(m_renderer, framebuffer.m_texture, NULL, NULL);
+}
+
+void Renderer::operator=(const Framebuffer& framebuffer)
+{
+    SDL_RenderCopy(m_renderer, framebuffer.m_texture, NULL, NULL);
 }
