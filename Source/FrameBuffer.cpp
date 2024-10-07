@@ -99,11 +99,11 @@ void Framebuffer::DrawLine(int x1, int y1, int x2, int y2, const color_t& color)
 	int dx = x2 - x1;
 	int dy = y2 - y1;
 
-	bool steep = (abs(dx) > abs(dy));
+	bool steep = (abs(dy) > abs(dx));
 	if (steep)
 	{
 		swap(x1,y1);
-		swap(x2, y2);
+		swap(x2,y2);
 	}
 
 	if (x1 > x2)
@@ -134,5 +134,48 @@ void Framebuffer::DrawLine(int x1, int y1, int x2, int y2, const color_t& color)
 
 void Framebuffer::DrawTriangle(int x1, int y1, int x2, int y2, int x3, int y3, const color_t& color)
 {
-
+	DrawLine(x1, y1, x2, y2, color);
+	DrawLine(x2, y2, x3, y3, color);
+	DrawLine(x3, y3, x1, y1, color);
 }
+
+void Framebuffer::CreateCircle(int xc, int yc, int x, int y, const color_t& color)
+{
+	m_buffer[(xc + x) + ((yc + y) * m_width)] = color;
+	m_buffer[(xc - x) + ((yc + y) * m_width)] = color;
+	m_buffer[(xc + x) + ((yc - y) * m_width)] = color;
+	m_buffer[(xc - x) + ((yc - y) * m_width)] = color;
+	m_buffer[(xc + y) + ((yc + x) * m_width)] = color;
+	m_buffer[(xc - y) + ((yc + x) * m_width)] = color;
+	m_buffer[(xc + y) + ((yc - x) * m_width)] = color;
+	m_buffer[(xc - y) + ((yc - x) * m_width)] = color;
+}
+
+void Framebuffer::DrawCircle(int xc, int yc, int rad, const color_t& color)
+{
+	int x = 0;
+	int y = rad;
+	int d = 3 - (2 * rad);
+
+	CreateCircle(xc, yc, x, y, color);
+
+	while (y >= x)
+	{
+		if (d > 0)
+		{
+			y--;
+			d += 4 * (x - y) + 10;
+		}
+		else
+		{
+			d += (4 * x) + 6;
+		}
+		x++;
+
+		CreateCircle(xc, yc, x, y, color);
+	}
+}
+
+
+
+

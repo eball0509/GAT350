@@ -27,9 +27,12 @@ int main(int argc, char* argv[])
             int y1 = rand() % framebuffer.m_height;
             int x2 = rand() % framebuffer.m_width;
             int y2 = rand() % framebuffer.m_height;
-            framebuffer.DrawPoint(x1, y1, { 255,255,255,255 });
+            //framebuffer.DrawPoint(x1, y1, { 255,255,255,255 });
             //framebuffer.DrawRect(x1, y1, x2, y2, { 255,255,255,255 });
             //framebuffer.DrawLine(x1, y1, x2, y2, { 255, 255, 255, 255 });
+            framebuffer.DrawCircle(400, 200, 10, {255,255,255,255});
+            framebuffer.DrawTriangle(100,400,300,400,200,300, {255,255,255,255});
+            framebuffer.DrawLine(100, 300, 200, 500, { 255,255,255,255 });
         }
 
         framebuffer.Update();

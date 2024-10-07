@@ -11,7 +11,7 @@ void Renderer::Initialize()
 
 void Renderer::CreateWindow(string name, int width, int height)
 {
-        m_window = SDL_CreateWindow("Game Engine",
+        m_window = SDL_CreateWindow("2D",
         SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
         width, height,
         SDL_WINDOW_SHOWN);
