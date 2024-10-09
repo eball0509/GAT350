@@ -1,5 +1,7 @@
 #include "FrameBuffer.h"
 #include "Renderer.h"
+#include "MathUtils.h"
+#include "Image.h"
 
 Framebuffer::Framebuffer(const Renderer& renderer, int width, int height)
 {
@@ -173,6 +175,91 @@ void Framebuffer::DrawCircle(int xc, int yc, int rad, const color_t& color)
 		x++;
 
 		CreateCircle(xc, yc, x, y, color);
+	}
+}
+
+void Framebuffer::DrawLinearCurve(int x1, int y1, int x2, int y2, const color_t& color)
+{
+	float dt = 1 / 10.0f;
+	float t1 = 0;
+	for (int i = 0; i < 10; i++)
+	{
+
+	int sx1 = Lerp(x1, x2, t1);
+	int sy1 = Lerp(y1, y2, t1);
+
+	float t2 = t1 + dt;
+
+	int sx2 = Lerp(x1, x2, t2);
+	int sy2 = Lerp(y1, y2, t2);
+
+	t1 += dt;
+	
+	DrawLine(sx1, sy1, sx2, sy2, color);
+
+	}
+}
+
+void Framebuffer::DrawQuadraticCurve(int x1, int y1, int x2, int y2, int x3, int y3, const color_t& color)
+{
+	float dt = 1 / 40.0f;
+	float t1 = 0;
+	for (int i = 0; i < 40; i++)
+	{
+		int sx1, sy1;
+		QuadraticPoint(x1, y1, x2, y2, x3, y3, t1, sx1, sy1);
+		float t2 = t1 + dt;
+		int sx2, sy2;
+		QuadraticPoint(x1, y1, x2, y2, x3, y3, t2, sx2, sy2);
+
+		t1 += dt;
+
+		DrawLine(sx1, sy1, sx2, sy2, color);
+
+	}
+}
+
+void Framebuffer::DrawCubicCurve(int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4, const color_t& color)
+{
+	float dt = 1 / 40.0f;
+	float t1 = 0;
+	for (int i = 0; i < 40; i++)
+	{
+		int sx1, sy1;
+		CubicPoint(x1, y1, x2, y2, x3, y3, x4, y4, t1, sx1, sy1);
+		float t2 = t1 + dt;
+		int sx2, sy2;
+		CubicPoint(x1, y1, x2, y2, x3, y3, x4, y4, t2, sx2, sy2);
+
+		t1 += dt;
+
+		DrawLine(sx1, sy1, sx2, sy2, color);
+
+	}
+}
+
+void Framebuffer::DrawImage(int x, int y, const Image& image)
+{
+	if (x + image.m_width < 0 || x >= m_width || y + image.m_height < 0 || y >= m_height) return;
+
+	for (int iy = 0; iy < image.m_height; iy++) 
+	{
+		int sy = y + iy;
+
+		if (sy < 0 || sy >= m_height) continue;
+
+		for (int ix = 0; ix < image.m_width; ix++)
+		{
+			int sx = x + ix;
+
+			if (sx < 0 || sx >= m_width) continue;
+
+			color_t color = image.m_buffer[ix + (iy * image.m_width)];
+
+			if (color.a == 0) continue;
+			m_buffer[sx + sy * m_width] = color;
+		}
+
 	}
 }
 
