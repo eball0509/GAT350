@@ -11,7 +11,7 @@ int main(int argc, char* argv[])
 
     Image image;
 
-    image.Load("amogus.png");
+    image.Load("image.png");
 
     renderer->Initialize();
     renderer->CreateWindow("2D", 800, 600);
@@ -60,18 +60,21 @@ int main(int argc, char* argv[])
 
         //framebuffer.DrawLinearCurve(100, 100, 200, 200, {255,255,255,255});
         //framebuffer.DrawQuadraticCurve(100, 200, mx, my, 300, 200, { 255,255,255,255 });
-        framebuffer.DrawCubicCurve(100, 200, mx, my, 200, 100, 200, 200, { 255, 255, 255, 255 });
-        framebuffer.DrawImage(200, 200, image);
-        PostProcess::Invert(framebuffer.m_buffer);
-        PostProcess::Monochrome(framebuffer.m_buffer);
-        PostProcess::Brightness(framebuffer.m_buffer, -100);
+        //framebuffer.DrawCubicCurve(100, 200, mx, my, 200, 100, 200, 200, { 255, 255, 255, 255 });
+        framebuffer.DrawImage(100, 100, image);
+        //PostProcess::Invert(framebuffer.m_buffer);
+        //PostProcess::Monochrome(framebuffer.m_buffer);
+        //PostProcess::Brightness(framebuffer.m_buffer, -50);
+        //PostProcess::ColorBalance(framebuffer.m_buffer, 200, 50, -50);
+        //PostProcess::NoiseEffect(framebuffer.m_buffer, 40);
+        //PostProcess::Threshold(framebuffer.m_buffer, 150);
+        //PostProcess::Posterization(framebuffer.m_buffer, 6);
 
         framebuffer.Update();
 
         *renderer = framebuffer;
 
-
-        // show screenr
+        // show screen
         SDL_RenderPresent(renderer->m_renderer);
     }
     return 0;
