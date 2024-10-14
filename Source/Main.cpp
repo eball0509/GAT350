@@ -70,6 +70,13 @@ int main(int argc, char* argv[])
         //PostProcess::Threshold(framebuffer.m_buffer, 150);
         //PostProcess::Posterization(framebuffer.m_buffer, 6);
 
+        //PostProcess::BoxBlur(framebuffer.m_buffer, framebuffer.m_width, framebuffer.m_height);
+        //PostProcess::GaussianBlur(framebuffer.m_buffer, framebuffer.m_width, framebuffer.m_height);
+        //PostProcess::Sharpen(framebuffer.m_buffer, framebuffer.m_width, framebuffer.m_height);
+        //PostProcess::Edge(framebuffer.m_buffer, framebuffer.m_width, framebuffer.m_height, 6);
+        //PostProcess::Emboss(framebuffer.m_buffer, framebuffer.m_width, framebuffer.m_height);
+        
+
         framebuffer.Update();
 
         *renderer = framebuffer;
