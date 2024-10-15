@@ -2,6 +2,7 @@
 #include "MathUtils.h"
 #include <algorithm>
 
+
 void PostProcess::Invert(vector<color_t>& buffer)
 {
 	for (auto& color : buffer)
@@ -86,6 +87,14 @@ void PostProcess::Posterization(vector<color_t>& buffer, uint8_t levels)
 		color.g = round(color.g / level) * level;
 		color.b = round(color.b / level) * level;
 	}
+}
+
+void PostProcess::Alpha(vector<color_t>& buffer, uint8_t alpha)
+{
+	for_each(buffer.begin(), buffer.end(), [alpha](color_t& c)
+		{
+			c.a = alpha;
+		});
 }
 
 void PostProcess::BoxBlur(std::vector<color_t>& buffer, int width, int height)

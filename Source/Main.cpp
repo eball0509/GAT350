@@ -3,6 +3,7 @@
 #include "Image.h"
 #include "PostProcess.h"
 #include <iostream>
+#include "GLM.h"
 using namespace std;
 
 int main(int argc, char* argv[])
@@ -10,8 +11,11 @@ int main(int argc, char* argv[])
     Renderer* renderer = new Renderer();
 
     Image image;
-
     image.Load("image.png");
+
+    Image imageAlpha;
+    imageAlpha.Load("colors.png");
+    PostProcess::Alpha(imageAlpha.m_buffer, 128);
 
     renderer->Initialize();
     renderer->CreateWindow("2D", 800, 600);
@@ -54,14 +58,17 @@ int main(int argc, char* argv[])
             //framebuffer.DrawImage(x1, y1, image);
 
         }
+        
 
         int mx, my;
         SDL_GetMouseState(&mx, &my);
 
+        framebuffer.DrawImage(100, 100, image);
+        framebuffer.DrawImage(mx, my, imageAlpha);
+
         //framebuffer.DrawLinearCurve(100, 100, 200, 200, {255,255,255,255});
         //framebuffer.DrawQuadraticCurve(100, 200, mx, my, 300, 200, { 255,255,255,255 });
         //framebuffer.DrawCubicCurve(100, 200, mx, my, 200, 100, 200, 200, { 255, 255, 255, 255 });
-        framebuffer.DrawImage(100, 100, image);
         //PostProcess::Invert(framebuffer.m_buffer);
         //PostProcess::Monochrome(framebuffer.m_buffer);
         //PostProcess::Brightness(framebuffer.m_buffer, -50);
@@ -76,6 +83,8 @@ int main(int argc, char* argv[])
         //PostProcess::Edge(framebuffer.m_buffer, framebuffer.m_width, framebuffer.m_height, 6);
         //PostProcess::Emboss(framebuffer.m_buffer, framebuffer.m_width, framebuffer.m_height);
         
+        glm::mat4 model = glm::mat4(1.0f);
+        model = glm::translate(model, glm::vec3(1.0f, 0.0f, 0.0f));
 
         framebuffer.Update();
 

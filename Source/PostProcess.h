@@ -11,6 +11,7 @@ namespace PostProcess
 	void NoiseEffect(vector<color_t>& buffer, uint8_t noise );
 	void Threshold(vector<color_t>& buffer, uint8_t threshold );
 	void Posterization(vector<color_t>& buffer, uint8_t levels );
+	void Alpha(vector<color_t>& buffer, uint8_t alpha);
 
 	void BoxBlur(std::vector<color_t>& buffer, int width, int height);
 	void GaussianBlur(std::vector<color_t>& buffer, int width, int height);
