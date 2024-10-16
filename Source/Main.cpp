@@ -2,8 +2,9 @@
 #include "FrameBuffer.h"
 #include "Image.h"
 #include "PostProcess.h"
+#include "Model.h"
+
 #include <iostream>
-#include "GLM.h"
 using namespace std;
 
 int main(int argc, char* argv[])
@@ -12,13 +13,20 @@ int main(int argc, char* argv[])
 
     Image image;
     image.Load("image.png");
-
     Image imageAlpha;
     imageAlpha.Load("colors.png");
     PostProcess::Alpha(imageAlpha.m_buffer, 128);
+    SetBlendMode(BlendMode::Multiply);
 
     renderer->Initialize();
     renderer->CreateWindow("2D", 800, 600);
+
+    
+    verticies_t verticies = { {-5, 5, 0},
+                              {5, 5, 0}, 
+                              {-5, -5, 0} };
+    Model model{ verticies, {0, 255, 0, 255 } };
+
 
     Framebuffer framebuffer(*renderer, 800, 600);
     bool quit = false;
@@ -41,7 +49,7 @@ int main(int argc, char* argv[])
         SDL_RenderClear(renderer->m_renderer);
 
 
-        framebuffer.Clear(color_t{ 0, 0, 0, 255 });
+        framebuffer.Clear(color_t{ 128, 128, 128, 255 });
 
         for (int i = 0; i < 20; i++)
         {
@@ -63,6 +71,8 @@ int main(int argc, char* argv[])
         int mx, my;
         SDL_GetMouseState(&mx, &my);
 
+        
+
         framebuffer.DrawImage(100, 100, image);
         framebuffer.DrawImage(mx, my, imageAlpha);
 
@@ -82,12 +92,19 @@ int main(int argc, char* argv[])
         //PostProcess::Sharpen(framebuffer.m_buffer, framebuffer.m_width, framebuffer.m_height);
         //PostProcess::Edge(framebuffer.m_buffer, framebuffer.m_width, framebuffer.m_height, 6);
         //PostProcess::Emboss(framebuffer.m_buffer, framebuffer.m_width, framebuffer.m_height);
+
+        int ticks = SDL_GetTicks(); 
+        float time = ticks * 0.001f;
         
-        glm::mat4 model = glm::mat4(1.0f);
-        model = glm::translate(model, glm::vec3(1.0f, 0.0f, 0.0f));
+        glm::mat4 modelMatrix = glm::mat4(1.0f);
+        glm::mat4 translate = glm::translate(modelMatrix, glm::vec3(40.0f, 40.0f, 0.0f));
+        glm::mat4 scale = glm::scale(modelMatrix, glm::vec3(2));
+        glm::mat4 rotate = glm::rotate(modelMatrix, glm::radians(45.0f), glm::vec3{0, 1, 0});
+
+        modelMatrix = translate * scale * rotate;
+        model.Draw(framebuffer, modelMatrix);
 
         framebuffer.Update();
-
         *renderer = framebuffer;
 
         // show screen
