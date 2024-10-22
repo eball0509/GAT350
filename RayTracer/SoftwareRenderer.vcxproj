@@ -19,22 +19,32 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Actor.cpp" />
+    <ClCompile Include="Source\Camera.cpp" />
     <ClCompile Include="Source\Color.cpp" />
+    <ClCompile Include="Source\ETime.cpp" />
     <ClCompile Include="Source\FrameBuffer.cpp" />
     <ClCompile Include="Source\Image.cpp" />
+    <ClCompile Include="Source\Input.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\Model.cpp" />
     <ClCompile Include="Source\PostProcess.cpp" />
     <ClCompile Include="Source\Renderer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Actor.h" />
+    <ClInclude Include="Source\Camera.h" />
     <ClInclude Include="Source\Color.h" />
+    <ClInclude Include="Source\ETime.h" />
     <ClInclude Include="Source\FrameBuffer.h" />
     <ClInclude Include="Source\Image.h" />
+    <ClInclude Include="Source\Input.h" />
     <ClInclude Include="Source\MathUtils.h" />
     <ClInclude Include="Source\Model.h" />
     <ClInclude Include="Source\PostProcess.h" />
+    <ClInclude Include="Source\Random.h" />
     <ClInclude Include="Source\Renderer.h" />
+    <ClInclude Include="Source\Transform.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
@@ -42,7 +52,7 @@
     <ProjectGuid>{ba638ad5-eaec-4e31-a0b9-9b2c85049042}</ProjectGuid>
     <RootNamespace>My2DRasterizationAssingment1</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>GAT350</ProjectName>
+    <ProjectName>SoftwareRenderer</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

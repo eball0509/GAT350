@@ -2,6 +2,8 @@
 #include "Renderer.h"
 #include "MathUtils.h"
 #include "Image.h"
+#include <iostream>
+using namespace std;
 
 Framebuffer::Framebuffer(const Renderer& renderer, int width, int height)
 {
@@ -39,7 +41,7 @@ void Framebuffer::DrawPoint(int x, int y, const color_t& color)
 
 void Framebuffer::DrawPointClip(int x, int y, const color_t& color)
 {
-	if (x >= m_width || x < 0 || y >= m_height) return;
+	if (x >= m_width || x < 0 || y >= m_height || y < 0) return;
 
 	color_t& dest = m_buffer[x + (y * m_width)];
 	dest = ColorBlend(color, dest);
@@ -129,7 +131,7 @@ void Framebuffer::DrawLine(int x1, int y1, int x2, int y2, const color_t& color)
 
 	for (int x = x1, y = y1; x <= x2; x++)
 	{
-		(steep) ? DrawPoint(y, x, color) : DrawPoint(x, y, color);
+		(steep) ? DrawPointClip(y, x, color) : DrawPointClip(x, y, color);
 		error -= dy;
 
 		if (error < 0) 
