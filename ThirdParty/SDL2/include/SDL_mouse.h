@@ -214,7 +214,7 @@ extern DECLSPEC int SDLCALL SDL_WarpMouseGlobal(int x, int y);
  *
  * \sa SDL_GetRelativeMouseMode
  */
-extern DECLSPEC int SDLCALL SetRelativeMode(SDL_bool enabled);
+extern DECLSPEC int SDLCALL SDL_SetRelativeMouseMode(SDL_bool enabled);
 
 /**
  * Capture the mouse and to track input outside an SDL window.

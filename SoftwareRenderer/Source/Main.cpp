@@ -44,9 +44,14 @@ int main(int argc, char* argv[])
     shared_ptr <Model> model = make_shared<Model>();
     model->Load("sphere.obj");
     model->SetColor({ 255,0,0,255 });
+    Transform modelTranfsorm{ {0, 0, 0}, glm::vec3{0, 0, 90}, glm::vec3{3} };
+   
 
-    Transform sphereTransformation{ {0, 0, 0}, glm::vec3{0, 0, 90}, glm::vec3{3} };
-    Actor actor(sphereTransformation, model);
+
+    
+
+    
+    Actor actor(modelTranfsorm, model);
 
     vector<unique_ptr<Actor>> actors;
 

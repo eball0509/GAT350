@@ -52,7 +52,7 @@
     <ProjectGuid>{ba638ad5-eaec-4e31-a0b9-9b2c85049042}</ProjectGuid>
     <RootNamespace>My2DRasterizationAssingment1</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>SoftwareRenderer</ProjectName>
+    <ProjectName>SoftwareRender</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

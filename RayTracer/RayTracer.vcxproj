@@ -49,10 +49,10 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{ba638ad5-eaec-4e31-a0b9-9b2c85049042}</ProjectGuid>
+    <ProjectGuid>{86EEB028-5B1F-403C-8CE9-37D3B12EDBE6}</ProjectGuid>
     <RootNamespace>My2DRasterizationAssingment1</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>SoftwareRenderer</ProjectName>
+    <ProjectName>RayTracer</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
