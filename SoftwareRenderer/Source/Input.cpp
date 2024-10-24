@@ -58,5 +58,5 @@ void Input::Update()
 
 void Input::SetRelativeMode(bool relative)
 {
-	//SDL_SetRelativeMouseMode(relative ? SDL_TRUE : SDL_FALSE);
+	SDL_SetRelativeMouseMode(relative ? SDL_TRUE : SDL_FALSE);
 }
