@@ -12,6 +12,7 @@
 #include "Random.h"
 #include "Tracer.h"
 #include "Scene.h"
+#include "Plane.h"
 
 #include <iostream>
 using namespace std;
@@ -28,18 +29,45 @@ int main(int argc, char* argv[])
 
     Framebuffer framebuffer(*renderer, renderer->GetWidth(), renderer->GetHeight());
 
-    Camera camera{ 70.0f, framebuffer.m_width / (float)framebuffer.m_height};
+    Camera camera{ 70.0f, framebuffer.m_width / (float)framebuffer.m_height };
     camera.SetView({ 0,0,-20 }, { 0, 0, 0 });
-   
+
     Scene scene;
 
-    shared_ptr<Material> material = make_shared <Material> (color3_t{ 1, 0, 0 });
-    auto object = make_unique<Sphere>(glm::vec3{ 0, 0, -40 }, 2.0f, material);
+    shared_ptr<Material> material = make_shared <Material>(color3_t{ 1, 0, 0 });
+    
+    shared_ptr<Material> gray = make_shared<Material>(color3_t{ 0.5f });
+    shared_ptr<Material> red = make_shared<Material>(color3_t{ 1, 0, 0 });
+    shared_ptr<Material> blue = make_shared<Material>(color3_t{ 0, 0, 1 });
+
+    auto object = make_unique<Sphere>(glm::vec3{ 0, -5, -40 }, 2.0f, blue);
+
+    auto plane = make_unique<Plane>(glm::vec3{ 0, -5, 0 }, glm::vec3{ 0, 1, 0 }, gray);
+
 
     scene.AddObject(move(object));
+    
 
+    vector<shared_ptr<Material>> materials;
+
+    materials.push_back(red);
+    materials.push_back(gray);
+    materials.push_back(blue);
 
     
+    for (int i = 0; i < 8; i++)
+    {
+        auto object = std::make_unique<Sphere>(random(glm::vec3{ -10 }, glm::vec3{ 10 }), random(2), materials[random(materials.size())]);
+
+        scene.AddObject(std::move(object));
+    }
+
+
+    scene.AddObject(move(plane));
+
+    SetBlendMode(BlendMode::Normal);
+
+
     bool quit = false;
     while (!quit)
     {
@@ -58,16 +86,16 @@ int main(int argc, char* argv[])
             }
         }
 
-        framebuffer.Clear(ColorConvert(color4_t{0, 0, 0, 1}));
+        framebuffer.Clear(ColorConvert(color4_t{ 0, 0, 0, 1 }));
 
         scene.Render(framebuffer, camera);
 
         framebuffer.Update();
-       
+
         *renderer = framebuffer;
 
         // show screen
         SDL_RenderPresent(renderer->m_renderer);
     }
     return 0;
-}
+};

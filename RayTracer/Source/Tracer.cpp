@@ -11,13 +11,13 @@ color3_t Tracer::Trace(Scene& scene, const ray_t& ray)
 	{
 		if (object->Hit(ray))
 		{
-			return { 1, 0, 0 };
+			return object->GetMaterial().lock()->GetColor();
 		}
 	}
 
 	glm::vec3 direction = glm::normalize(ray.direction);
 	float t = (direction.y + 1) * 0.5f;
-	color = Lerp(color3_t{1, 1, 1}, color3_t{0.5f, 0.7f, 1.0f}, t);
+	color = Lerp(color3_t{1, 0.35f, 1}, color3_t{0.5f, 0.3f, 1.0f}, t);
 
 	return color;
 }
