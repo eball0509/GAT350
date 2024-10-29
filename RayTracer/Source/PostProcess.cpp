@@ -83,9 +83,9 @@ void PostProcess::Posterization(vector<color_t>& buffer, uint8_t levels)
 	uint8_t level = 255 / levels ;
 	for (auto& color : buffer)
 	{
-		color.r = round(color.r / level) * level;
-		color.g = round(color.g / level) * level;
-		color.b = round(color.b / level) * level;
+		color.r = (uint8_t)(round(color.r / level) * level);
+		color.g = (uint8_t)(round(color.g / level) * level);
+		color.b = (uint8_t)(round(color.b / level) * level);
 	}
 }
 

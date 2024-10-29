@@ -16,6 +16,7 @@
     <ClCompile Include="Source\Scene.cpp" />
     <ClCompile Include="Source\Sphere.cpp" />
     <ClCompile Include="Source\Plane.cpp" />
+    <ClCompile Include="Source\Material.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Actor.h" />

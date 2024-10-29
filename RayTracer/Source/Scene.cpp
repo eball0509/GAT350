@@ -2,6 +2,8 @@
 #include "FrameBuffer.h"
 #include "Camera.h"
 #include "Tracer.h"
+#include <glm/glm.hpp>
+#include <iostream>
 
 
 void Scene::Render(Framebuffer& framebuffer, const Camera& camera)
@@ -16,9 +18,10 @@ void Scene::Render(Framebuffer& framebuffer, const Camera& camera)
 
 			ray_t ray = camera.GetRay(point);
 
-			color3_t color = Tracer::Trace(*this, ray);
+			color3_t color = Tracer::Trace(*this, ray, 0.001f, 100.0f);
 
 			framebuffer.DrawPoint(x, y, ColorConvert(color));
 		}
+		cout << "y: " << y << endl;
 	}
 }

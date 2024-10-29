@@ -15,12 +15,12 @@ class Model
 {
 public:
 	Model() = default;
-	Model(const verticies_t& verticies, const color_t& color) : m_verticies{ verticies }, m_color{ color } {}
+	Model(const verticies_t& verticies, const color_t& color) : m_verticies{ verticies }, m_albedo{ color } {}
 
 	void Draw(Framebuffer& framebuffer, const glm::mat4& model, const class Camera& camera);
 	bool Load(const string& filename);
-	void SetColor(color_t color) { m_color = color; }
+	void SetColor(color_t color) { m_albedo = color; }
 public:
 	verticies_t m_verticies;
-	color_t m_color{0};
+	color_t m_albedo{0};
 };
