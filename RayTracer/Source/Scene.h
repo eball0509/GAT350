@@ -11,7 +11,7 @@ class Scene
 public:
 	Scene() = default;
 
-	void Render(class Framebuffer& framerbuffer, const class Camera& camera);
+	void Render(class Framebuffer& framerbuffer, const class Camera& camera, int numSpamples = 10, int depth = 5);
 	void AddObject(unique_ptr<class SceneObject> object) { m_objects.push_back(move(object)); }
 
 	friend class Tracer;

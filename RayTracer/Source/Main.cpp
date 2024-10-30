@@ -13,6 +13,7 @@
 #include "Tracer.h"
 #include "Scene.h"
 #include "Plane.h"
+#include "Material.h"
 
 #include <iostream>
 using namespace std;
@@ -35,10 +36,10 @@ int main(int argc, char* argv[])
     camera.SetView({ 0,0,-20 }, { 0, 0, 0 });
 
     Scene scene;
-    shared_ptr<Material> material = make_shared <Lambertian>(color3_t{ 1, 0, 0 });
+    shared_ptr<Material> material = make_shared<Emissive>(color3_t{ 1, 1, 1 }, 1.33f);
     shared_ptr<Material> gray = make_shared<Lambertian>(color3_t{ 0.5f });
     shared_ptr<Material> red = make_shared<Metal>(color3_t{ 1, 0, 0 }, 1);
-    shared_ptr<Material> blue = make_shared<Metal>(color3_t{ 0, 0, 1 }, 1);
+    shared_ptr<Material> blue = make_shared<Emissive>(color3_t{ 0, 0, 1 }, 4);
 
     auto object = make_unique<Sphere>(glm::vec3{ 0, -5, -40 }, 2.0f, blue);
     auto plane = make_unique<Plane>(glm::vec3{ 0, -5, 0 }, glm::vec3{ 0, 1, 0 }, gray);
@@ -52,11 +53,12 @@ int main(int argc, char* argv[])
     materials.push_back(red);
     materials.push_back(gray);
     materials.push_back(blue);
+    materials.push_back(material);
 
 
-    for (int i = 0; i < 15; i++)
+    for (int i = 0; i < 20; i++)
     {
-        auto object = std::make_unique<Sphere>(random(glm::vec3{ -10 }, glm::vec3{ 10 }), random(2), materials[random(materials.size())]);
+        auto object = std::make_unique<Sphere>(random(glm::vec3{ -10 }, glm::vec3{ 10 }), random(4), materials[random(materials.size())]);
         scene.AddObject(std::move(object));
     }
 
@@ -82,7 +84,7 @@ int main(int argc, char* argv[])
 
         framebuffer.Clear(ColorConvert(color4_t{ 0, 0, 0, 1 }));
 
-        scene.Render(framebuffer, camera);
+        scene.Render(framebuffer, camera, 10, 20);
 
         framebuffer.Update();
 
