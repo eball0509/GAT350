@@ -33,19 +33,19 @@ bool Dielectric::Scatter(const ray_t ray, const raycastHit_t& raycastHit, color3
 	{
 		outNormal = raycastHit.normal;
 		ni_over_nt = 1.0f / m_ri;
-		cosine = glm::dot(ray.direction, raycastHit.normal) / ray.direction.length();
+		cosine = glm::dot(ray.direction, raycastHit.normal) / glm::length(ray.direction);
 	}
 	else
 	{
 		outNormal = -raycastHit.normal;
 		ni_over_nt = m_ri;
-		cosine = m_ri * glm::dot(ray.direction, raycastHit.normal) / ray.direction.length();
+		cosine = m_ri * glm::dot(ray.direction, raycastHit.normal) / glm::length(ray.direction);
 	}
 
 	glm::vec3 refracted;
 	float reflectProb = 1.0f;
 
-	if(Refract(ray.direction, raycastHit.normal, m_ri, refracted))
+	if(Refract(ray.direction, outNormal, ni_over_nt, refracted))
 	{
 		reflectProb = Schlick(cosine, m_ri);
 	}

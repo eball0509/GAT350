@@ -17,6 +17,7 @@
     <ClCompile Include="Source\Sphere.cpp" />
     <ClCompile Include="Source\Plane.cpp" />
     <ClCompile Include="Source\Material.cpp" />
+    <ClCompile Include="Source\Triangle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Actor.h" />
@@ -39,5 +40,6 @@
     <ClInclude Include="Source\SceneObject.h" />
     <ClInclude Include="Source\Sphere.h" />
     <ClInclude Include="Source\Plane.h" />
+    <ClInclude Include="Source\Triangle.h" />
   </ItemGroup>
 </Project>
