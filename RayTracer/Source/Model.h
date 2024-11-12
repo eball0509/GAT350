@@ -19,7 +19,11 @@ public:
 
 	Model(shared_ptr<Material> material) : SceneObject{ material } {}
 
+	Model(const Transform& transform, shared_ptr<Material> material) : SceneObject{transform, material } {}
+
 	Model(const verticies_t& vertices, std::shared_ptr<Material> material) : SceneObject{ material }, m_verticies{ vertices } {}
+
+	void Update();
 
 	bool Load(const string& filename);
 
@@ -29,8 +33,8 @@ public:
 private:
 
 	verticies_t m_verticies;
+	verticies_t m_local_verticies;
 
-
-	
-
+	glm::vec3 m_center{ 0 };
+	float m_radius{ 0 };
 };

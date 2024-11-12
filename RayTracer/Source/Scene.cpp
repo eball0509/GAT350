@@ -2,14 +2,29 @@
 #include "FrameBuffer.h"
 #include "Camera.h"
 #include "Tracer.h"
+#include "ETime.h"
 #include <glm/glm.hpp>
 #include <iostream>
 
+using namespace std;
+
+
+void Scene::Update()
+{
+	for (auto& object : m_objects)
+	{
+		object->Update();
+	}
+}
 
 void Scene::Render(Framebuffer& framebuffer, const Camera& camera, int numSamples, int depth)
 {
+	Time frameTimer;
+	Time scanLineTimer;
+
 	for (int y = 0; y < framebuffer.m_height; y++)
 	{
+		scanLineTimer.Reset();
 		for (int x = 0; x < framebuffer.m_width; x++)
 		{
 			color3_t color { 0 };
@@ -32,6 +47,7 @@ void Scene::Render(Framebuffer& framebuffer, const Camera& camera, int numSample
 
 			framebuffer.DrawPoint(x, y, ColorConvert(color));
 		}
-		cout << "y: " << y << endl;
+		std::cout << "y: " << y << " - Release Time " << scanLineTimer.GetElapsedTime() << endl;
 	}
+	std::cout << "frame time: " << frameTimer.GetElapsedTime() << endl;
 }

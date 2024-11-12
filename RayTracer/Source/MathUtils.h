@@ -100,7 +100,7 @@ inline void CubicPoint(int x1, int y1, int x2, int y2, int x3, int y3, int x4, i
 inline bool approximately(float value1, float value2)
 {
 	// check if the difference between the values is less than epsilon
-	return (abs(value1 - value2 ) < FLT_EPSILON);
+	return (fabs(value1 - value2 ) < FLT_EPSILON);
 }
 
 
