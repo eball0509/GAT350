@@ -12,6 +12,10 @@ This project explores fundamental computer graphics concepts by implementing a s
     * **Post-Processing:** Includes basic post-processing effects like gamma correction.
     * **Libraries:** Utilizes SDL for windowing and input, GLM for linear algebra and vector operations, and STB for image loading.
     
+   ![Screenshot 2024-10-12 212329](https://github.com/user-attachments/assets/783ced05-ffa2-4f50-af89-a2e357d52266)
+
+   ![Screenshot 2024-10-12 212309](https://github.com/user-attachments/assets/bb7c91e8-594d-4583-a6a5-06cf55e6b740)
+
 
 
 **Ray Tracer**
