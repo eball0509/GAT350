@@ -16,7 +16,15 @@ This project explores fundamental computer graphics concepts by implementing a s
 
    ![Screenshot 2024-10-12 212309](https://github.com/user-attachments/assets/bb7c91e8-594d-4583-a6a5-06cf55e6b740)
 
-
+    * **Usage:** You can move around in the Software Rendere with these controls:
+      While holding Right Click:
+      W - UP
+      A - Right
+      S - Down
+      D - Left
+      Q - Backwards
+      E - Forwards
+                                                                                 
 
 **Ray Tracer**
 
