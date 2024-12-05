@@ -24,8 +24,8 @@ This project explores fundamental computer graphics concepts by implementing a s
     * **Anti-Aliasing:** Reduces aliasing artifacts using techniques like super-sampling.
     * **Multiple Bounce Reflections:** Simulates multiple reflections for more accurate and realistic rendering.
  
-    * ![Screenshot 2024-12-05 153834](https://github.com/user-attachments/assets/0a175bbc-bfe2-40d3-986c-422ef0012bef) "width" = 100
-
+    * ![Screenshot 2024-12-05 153834](https://github.com/user-attachments/assets/0a175bbc-bfe2-40d3-986c-422ef0012bef)
+      
 **Understanding Vertex and Fragment Shaders**
 
 * **Vertex Shader:**
