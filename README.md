@@ -11,6 +11,8 @@ This project explores fundamental computer graphics concepts by implementing a s
     * **Model Loading:** Supports loading and rendering 3D models (e.g., OBJ format).
     * **Post-Processing:** Includes basic post-processing effects like gamma correction.
     * **Libraries:** Utilizes SDL for windowing and input, GLM for linear algebra and vector operations, and STB for image loading.
+    ![Screenshot 2024-12-05 153834](https://github.com/user-attachments/assets/0a175bbc-bfe2-40d3-986c-422ef0012bef)
+
 
 **Ray Tracer**
 
